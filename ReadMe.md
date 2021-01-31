@@ -55,3 +55,9 @@
     형식으로 입력받을 수 있는 api url을 제공할 경우 사용 가능하다.
     
     - yml 파일의 kjs-mall.file-upload 의 설정을 맞추면 사용 가능하다.
+    
+    
+    
+<h2>5. 프로젝트 확장</h3>
+- flyway를 통한 db 형상관리를 하고있기 때문에 ddl의 변경 혹은 기본값 세팅등의
+데이터베이스 설정이 변경될 경우 resources/db/migration 폴더에 sql 추가가 요구된다. 
