@@ -1,0 +1,70 @@
+= Mall API Guide
+김준섭;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:operation-curl-request-title: Example request
+:operation-http-response-title: Example response
+:docinfo: shared-head
+
+[[overview]]
+= 개요
+
+== link:/docs/index.html[home]
+
+[[overview-error-verbs]]
+== 오류 코드
+
+|===
+| 발생 API | CAUSE | CODE | MESSAGE
+
+| <<resources-create-file-upload-exchange>>
+| 업로드한 파일의 확장자가 허용되지 않은 경우
+| 4032
+| 파일 업로드에 실패했습니다. 이미지만 업로드 가능합니다.
+
+| <<resources-create-file-upload-exchange>>
+| 업로드한 파일의 변환 과정중 에러가 발생한 경우 (파일 크기 초과등)
+| 4033
+| 파일 업로드에 실패했습니다. 이미지만 업로드 가능합니다.
+
+| <<resources-create-file-upload-exchange>>
+| 파일서버와의 통신에서 에러가 발생한 경우
+| 4034
+| 파일 서버오류 발생으로 업로드에 실패하였습니다.
+
+|
+|===
+
+[[history]]
+== 히스토리
+
+히스토리는 문서의 변경이력을 표시한다.
+
+- 2020-12-03
+
+* <<resources-create-file-upload-exchange>> 최초 생성
+
+* 문서 생성
+
+[[resources-upload]]
+== 업로드 리소스
+
+업로드 리소스를 사용할 수 있습니다.
+
+[[resources-create-file-upload-exchange]]
+=== 교환 이미지 파일 업로드
+
+'POST' 요청을 사용해서 상품 교환 이미지를 업로드 할 수 있습니다.
+
+operation::create-file-upload-exchange[snippets='request-parts,response-fields,curl-request,http-response']
+
+[[resources-create-file-upload-base]]
+=== 기본 상품 이미지 파일 업로드
+
+'POST' 요청을 사용해서 상품 이미지를 업로드 할 수 있습니다.
+
+operation::create-file-upload-base[snippets='request-parts,response-fields,curl-request,http-response']

@@ -1,0 +1,84 @@
+= Mall API Guide
+김준섭;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:operation-curl-request-title: Example request
+:operation-http-response-title: Example response
+:docinfo: shared-head
+
+[[overview]]
+= 개요
+
+== link:/docs/index.html[home]
+
+[[overview-error-verbs]]
+== 오류 코드
+
+|===
+| 발생 API | CAUSE | CODE | MESSAGE
+
+| <<resources-destination-create>>
+| 등록 가능한 배송지 개수를 초과하였을 경우
+| 4021
+| 저장 가능한 배송지 최대 개수를 초과 하였습니다.
+
+|
+|===
+
+[[history]]
+== 히스토리
+
+히스토리는 문서의 변경이력을 표시한다.
+
+- 2020-11-16
+
+* <<resources-destination-update>> tel2 덮어쓰기로 수정
+
+- 2020-11-12
+
+* <<resources-destination-remove>> 최초 생성
+
+* <<resources-destination-update>> 최초 생성
+
+* <<resources-destination-query>> 최초 생성
+
+* <<resources-destination-create>> 최초 생성
+
+* 문서 생성
+
+[[resources-destination]]
+== 배송지 리소스
+
+배송지 리소스(사용자)를 사용할 수 있습니다.
+
+[[resources-destination-create]]
+=== 배송지 생성
+
+'POST' 요청을 사용해서 배송지를 생성할 수 있다.
+
+operation::create-destination[snippets='request-fields,response-fields,curl-request,http-response']
+
+[[resources-destination-query]]
+=== 배송지 조회
+
+'GET' 요청을 사용해서 로그인한 회원의 배송지 목록을 조회할 수 있다.
+
+operation::query-destination[snippets='response-fields,curl-request,http-response']
+
+[[resources-destination-update]]
+=== 배송지 수정
+
+'PUT' 요청을 사용해서 배송지를 수정할 수 있다.
+
+operation::update-destination[snippets='path-parameters,request-fields,curl-request,http-response']
+
+[[resources-destination-remove]]
+=== 배송지 삭제
+
+'DELETE' 요청을 사용해서 배송지를 삭제할 수 있다.
+
+operation::delete-destination[snippets='path-parameters,curl-request,http-response']

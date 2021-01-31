@@ -1,0 +1,77 @@
+= Mall API Guide
+김준섭;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:operation-curl-request-title: Example request
+:operation-http-response-title: Example response
+:docinfo: shared-head
+
+[[overview]]
+= 개요
+
+== link:/docs/index.html[home]
+
+[[overview-error-verbs]]
+== 오류 코드
+
+|===
+| 발생 API | CAUSE | CODE | MESSAGE
+
+
+
+|
+|===
+
+[[history]]
+== 히스토리
+
+히스토리는 문서의 변경이력을 표시한다.
+
+- 2020-12-18
+
+* 문서 생성
+
+[[resources-qna]]
+== QNA 리소스
+
+QNA 리소스(관리자)를 사용할 수 있습니다.
+
+[[resources-qna-create]]
+=== QNA 등록
+
+'POST' 요청을 사용해서 qna를 작성할 수 있다.
+
+operation::create-qna-question[snippets='request-fields,response-fields,curl-request,http-response']
+
+[[resources-qna-query]]
+=== QNA 조회
+
+'GET' 요청을 사용해서 qna를 조회할 수 있다.
+
+operation::query-qna-question[snippets='request-parameters,response-fields,curl-request,http-response']
+
+[[resources-qna-update]]
+=== QNA 수정
+
+'PUT' 요청을 사용해서 qna를 수정할 수 있다.
+
+operation::update-qna-question[snippets='path-parameters,request-fields,curl-request,http-response']
+
+[[resources-qna-answer-update]]
+=== QNA 답변
+
+'PUT' 요청을 사용해서 qna에 답변할 수 있다.
+
+operation::update-qna-answer[snippets='path-parameters,request-fields,curl-request,http-response']
+
+[[resources-qna-delete]]
+=== QNA 삭제
+
+'DELETE' 요청을 사용해서 qna를 삭제할 수 있다.
+
+operation::delete-qna[snippets='path-parameters,curl-request,http-response']
+

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script th:inline="javascript">
+
+    function attributeGenerator(key, value) {
+        let input = document.createElement('input');
+        input.setAttribute("type", "hidden");
+        input.setAttribute("name", key);
+        input.setAttribute("value", value);
+        return input;
+    }
+
+    let clientId = [[${clientId}]];
+    let redirectUri = [[${redirectUrl}]];
+    let responseType = [[${responseType}]];
+    let LoginSubmit = document.createElement("form");
+    LoginSubmit.action = "https://kauth.kakao.com/oauth/authorize"
+    LoginSubmit.appendChild(attributeGenerator("client_id", clientId));
+    LoginSubmit.appendChild(attributeGenerator("redirect_uri", redirectUri));
+    LoginSubmit.appendChild(attributeGenerator("response_type", responseType));
+    document.body.appendChild(LoginSubmit);
+    LoginSubmit.submit();
+</script>
+</html>

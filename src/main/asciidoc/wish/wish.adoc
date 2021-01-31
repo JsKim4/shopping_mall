@@ -1,0 +1,72 @@
+= Mall API Guide
+김준섭;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:operation-curl-request-title: Example request
+:operation-http-response-title: Example response
+:docinfo: shared-head
+
+[[overview]]
+= 개요
+
+== link:/docs/index.html[home]
+
+[[overview-error-verbs]]
+== 오류 코드
+
+|===
+| 발생 API | CAUSE | CODE | MESSAGE
+
+| <<resources-wish-create>>
+| 상품 정보가 존재하지 않는 경우
+| 404
+| 요청한 리소스가 존재하지 않습니다.
+
+|
+|===
+
+[[history]]
+== 히스토리
+
+히스토리는 문서의 변경이력을 표시한다.
+
+
+- 2020-11-11
+
+* <<resources-wish-create>> 최초 생성
+
+* <<resources-wish-remove>> 최초 생성
+
+* <<resources-wish-query>> 최초 생성
+
+* 문서 생성
+
+[[resources-wish]]
+=== 찜 리소스
+
+찜 리소스(사용자)를 사용할 수 있습니다.
+
+[[resources-wish-create]]
+=== 찜 생성
+
+'POST' 요청을 사용해서 찜을 생성할 수 있다.
+
+operation::create-products-wish[snippets='path-parameters,response-fields,curl-request,http-response']
+
+[[resources-wish-query]]
+=== 찜 조회
+
+'GET' 요청을 사용해서 로그인한 회원의 찜 목록을 조회할 수 있다.
+
+operation::query-products-wish[snippets='response-fields,curl-request,http-response']
+
+[[resources-wish-remove]]
+=== 찜 삭제
+
+'DELETE' 요청을 사용해서 찜을 삭제할 수 있다.
+
+operation::delete-products-wish[snippets='path-parameters,curl-request,http-response']

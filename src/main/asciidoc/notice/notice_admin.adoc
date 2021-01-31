@@ -1,0 +1,119 @@
+= Mall API Guide
+김준섭;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:operation-curl-request-title: Example request
+:operation-http-response-title: Example response
+:docinfo: shared-head
+
+[[overview]]
+= 개요
+
+== link:/docs/index.html[home]
+
+[[overview-error-verbs]]
+== 오류 코드
+
+|===
+| 발생 API | CAUSE | CODE | MESSAGE
+
+
+|
+|===
+
+[[overview-api-grant]]
+== API 권한
+
+|===
+| 사용 API | 필요 권한
+
+| <<resources-notice-create>>
+| NOTICE
+
+| <<resources-notice-query>>
+| NOTICE
+
+| <<resources-notices-query>>
+| NOTICE
+
+| <<resources-notice-update>>
+| NOTICE
+
+| <<resources-notice-delete>>
+| NOTICE
+
+| <<resources-notice-update-used>>
+| NOTICE
+
+| <<resources-notice-update-unused>>
+| NOTICE
+
+|
+|===
+
+[[hinotice]]
+== 히스토리
+
+히스토리는 문서의 변경이력을 표시한다.
+
+- 2020-12-15
+
+* 문서 생성
+
+[[resources-notice]]
+== 공지사항 리소스
+
+공지사항 리소스(admin)을 사용할 수 있습니다.
+
+[[resources-notice-create]]
+=== 공지사항 정보 생성
+
+'POST' 요청을 사용해서 공지사항 정보를 생성할 수 있다.
+
+operation::create-notice[snippets='request-fields,response-fields,curl-request,http-response']
+
+[[resources-notices-query]]
+=== 공지사항 조회
+
+'GET' 요청을 사용해서 공지사항 정보를 조회할 수 있다.
+
+operation::query-stories[snippets='request-parameters,response-fields,curl-request,http-response']
+
+[[resources-notice-query]]
+=== 공지사항 단일 조회
+
+'GET' 요청을 사용해서 공지사항 단일 정보를 조회할 수 있다.
+
+operation::query-notice[snippets='response-fields,curl-request,http-response']
+
+[[resources-notice-update]]
+=== 공지사항 수정
+
+'PUT' 요청을 사용해서 공지사항 정보를 수정할 수 있다.
+
+operation::update-notice[snippets='path-parameters,request-fields,curl-request,http-response']
+
+[[resources-notice-delete]]
+=== 공지사항 삭제
+
+'DELETE' 요청을 사용해서 공지사항을 삭제할 수 있다.
+
+operation::delete-notice[snippets='path-parameters,curl-request,http-response']
+
+[[resources-notice-update-used]]
+=== 공지사항 사용 상태로 수정
+
+'PUT' 요청을 사용해서 공지사항를 사용 상태로 변경할 수 있다.
+
+operation::update-notice-used[snippets='path-parameters,curl-request,http-response']
+
+[[resources-notice-update-unused]]
+=== 공지사항 중지 상태로 수정
+
+'PUT' 요청을 사용해서 공지사항를 사용 중지상태로 변경할 수 있다.
+
+operation::update-notice-unused[snippets='path-parameters,curl-request,http-response']

@@ -1,0 +1,101 @@
+= Mall API Guide
+김준섭;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:operation-curl-request-title: Example request
+:operation-http-response-title: Example response
+:docinfo: shared-head
+
+[[overview]]
+= 개요
+
+== link:/docs/index.html[home]
+
+[[overview-error-verbs]]
+== 오류 코드
+
+|===
+| 발생 API | CAUSE | CODE | MESSAGE
+
+
+
+|
+|===
+
+[[history]]
+== 히스토리
+
+히스토리는 문서의 변경이력을 표시한다.
+
+- 2020-12-24
+
+* <<resources-new_product_calendar-query>> 최초 생성
+* <<resources-new_product_calendar-update>> 최초 생성
+* <<resources-best_review-create>> 최초 생성
+* <<resources-best_review-delete>> 최초 생성
+* <<resources-best_review_product-create>> 최초 생성
+* <<resources-best_review_product-delete>> 최초 생성
+* <<resources-best_review-query>> 최초 생성
+
+- 2020-12-17
+
+* 문서 생성
+
+[[resources-main]]
+== 메인 리소스
+
+메인 화면 관련 리소스(사용자)를 사용할 수 있습니다.
+
+[[resources-new_product_calendar-query]]
+=== 신규 상품 캘린터 조회
+
+'GET' 요청을 사용해서 신규 상품 목록을 조회할 수 있다.
+
+operation::query-new_product_calendar[snippets='response-fields,curl-request,http-response']
+
+[[resources-new_product_calendar-update]]
+=== 신규 상품 캘린터 변경
+
+'GET' 요청을 사용해서 신규 상품 목록을 조회할 수 있다.
+
+operation::update-new_product_calendar[snippets='path-parameters,request-fields,response-fields,curl-request,http-response']
+
+[[resources-best_review-query]]
+=== 베스트 리뷰 조회
+
+'GET' 요청을 사용해서 베스트 리뷰를 조회할 수 있다.
+
+operation::query-best_review[snippets='request-parameters,response-fields,curl-request,http-response']
+
+[[resources-best_review_product-create]]
+=== 베스트 리뷰 상품 등록
+
+'PUT' 요청을 사용해서 베스트 리뷰 상품으로 등록할 수 있다.
+
+operation::create-best-review-product[snippets='path-parameters,curl-request,http-response']
+
+[[resources-best_review_product-delete]]
+=== 베스트 리뷰 상품 등록 취소
+
+'PUT' 요청을 사용해서 베스트 리뷰 상품 등록을 취소할 수 있다.
+
+operation::delete-best-review-product[snippets='path-parameters,curl-request,http-response']
+
+[[resources-best_review-create]]
+=== 베스트 리뷰 등록
+
+'PUT' 요청을 사용해서 베스트 리뷰로 등록할 수 있다.
+
+operation::create-best-review[snippets='path-parameters,curl-request,http-response']
+
+[[resources-best_review-delete]]
+=== 베스트 리뷰 등록 취소
+
+'PUT' 요청을 사용해서 베스트 리뷰로 등록할 수 있다.
+
+operation::delete-best-review[snippets='path-parameters,curl-request,http-response']
+

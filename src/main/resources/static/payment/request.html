@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <title>payment</title>
+</head>
+<body>
+</body>
+<script type="text/javascript" src="https://web.nicepay.co.kr/v3/webstd/js/nicepay-3.0.js">
+</script>
+<script type="text/javascript">
+    function isMobile() {
+        var UserAgent = navigator.userAgent;
+        if (UserAgent.match(/iPhone|iPod|Android|Windows CE|BlackBerry|Symbian|Windows Phone|webOS|Opera Mini|Opera Mobi|POLARIS|IEMobile|lgtelecom|nokia|SonyEricsson/i) != null || UserAgent.match(/LG|SAMSUNG|Samsung/) != null) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    function getUrlParams() {
+        let params = {};
+        window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (str, key, value) {
+            params[key] = value;
+        });
+        return params;
+    }
+
+    function attributeGenerator(key, value) {
+        let inputs = document.createElement('input');
+        inputs.setAttribute("type", "hidden");
+        inputs.setAttribute("name", key);
+        inputs.setAttribute("value", value);
+        return inputs;
+    }
+
+    let paySubmit = document.createElement("form");
+    let tempRequestParam = getUrlParams();
+    let goodsName = decodeURI(tempRequestParam.goodsName);
+
+
+    let RequestParam = {
+        "GoodsName": goodsName,
+        "Amt": Number.parseInt(tempRequestParam.amt),
+        "SignData": tempRequestParam.signData,
+        "MID": tempRequestParam.mid,
+        "EdiDate": tempRequestParam.ediDate,
+        "ReturnURL": tempRequestParam.returnUrl,
+        "CharSet": "utf-8",
+        "Moid": tempRequestParam.moid
+    }
+
+
+    if (tempRequestParam.payMethod == "KAKAO") {
+        RequestParam.PayMethod = "CARD";
+        RequestParam.DirectShowOpt = "CARD";
+        RequestParam.NicepayReserved = "DirectKakao=Y";
+    } else if (tempRequestParam.payMethod === 'CARD') {
+        RequestParam.PayMethod = "CARD";
+    } else if (tempRequestParam.payMethod === 'VBANK') {
+        RequestParam.PayMethod = "VBANK";
+        RequestParam.VbankExpDate = tempRequestParam.vbankExpDate;
+    } else if (tempRequestParam.payMethod === 'NAVER') {
+        RequestParam.PayMethod = "CARD";
+        //RequestParam.DirectShowOpt = "CARD";
+        RequestParam.DirectEasyPay = "E020";
+        RequestParam.EasyPayMethod = "E020=CARD";
+    }
+    for (const [key, value] of Object.entries(RequestParam)) {
+        paySubmit.appendChild(attributeGenerator(key, value));
+    }
+
+    paySubmit.name = 'payment';
+    paySubmit.method = 'POST';
+    paySubmit.acceptCharset = "euc-kr";
+    document.body.appendChild(paySubmit);
+    if (isMobile()) {
+        console.log('isMobile');
+        console.log(paySubmit);
+        paySubmit.action = tempRequestParam.certificationRequestUrl;
+        paySubmit.submit();
+    } else {
+        console.log('isNotMobile');
+        goPay(paySubmit);
+    }
+
+    function nicepaySubmit() {
+        let nicePaySubmit = document.getElementsByName("payment")[0];
+        nicePaySubmit.action = tempRequestParam.returnUrl;
+        nicePaySubmit.acceptCharset = 'UTF-8';
+        nicePaySubmit.submit();
+    }
+
+    function nicepayClose() {
+        let nicePaySubmit = document.getElementsByName("payment")[0];
+        nicePaySubmit.action = tempRequestParam.returnUrl;
+        nicePaySubmit.acceptCharset = 'UTF-8';
+        nicePaySubmit.submit();
+    }
+
+
+</script>

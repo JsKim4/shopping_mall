@@ -1,0 +1,55 @@
+= Mall API Guide
+김준섭;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:operation-curl-request-title: Example request
+:operation-http-response-title: Example response
+:docinfo: shared-head
+
+[[overview]]
+= 개요
+
+== link:/docs/index.html[home]
+
+[[overview-error-verbs]]
+== 오류 코드
+
+|===
+| 발생 API | CAUSE | CODE | MESSAGE
+
+
+
+|
+|===
+
+[[history]]
+== 히스토리
+
+히스토리는 문서의 변경이력을 표시한다.
+
+- 2020-12-15
+
+* 문서 생성
+
+[[resources-story]]
+== 쇼핑 스토리 리소스
+
+쇼핑 스토리 리소스(공통및 사용자)을 사용할 수 있습니다.
+
+[[resources-stories-query]]
+=== 쇼핑 스토리 조회
+
+'GET' 요청을 사용해서 쇼핑 스토리를 조회할 수 있다.
+
+operation::query-stories[snippets='request-parameters,response-fields,curl-request,http-response']
+
+[[resources-story-query]]
+=== 쇼핑 스토리 단일 조회
+
+'GET' 요청을 사용해서 쇼핑 스토리를 단일 조회할 수 있다.
+
+operation::query-story[snippets='path-parameters,response-fields,curl-request,http-response']

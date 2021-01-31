@@ -1,0 +1,94 @@
+spring:
+  datasource:
+    url: jdbc:sqlserver://db_host:db_port;databaseName=db_name
+    username: db_user # 읽기 쓰기 권한만 있는 사용자 지정
+    password: db_password
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    hikari:
+      maximum-pool-size: 100
+
+
+  flyway:
+    url: jdbc:sqlserver://db_host:db_port;databaseName=db_name
+    user: db_user # ddl 권한이 있는 사용자 지정
+    password: db_password
+    baseline-on-migrate: true
+    enabled: true
+    validate-on-migrate: false
+
+  servlet:
+    multipart:
+      enabled: true
+      location: ${java.io.tmpdir}
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+  jpa:
+    database-platform: me.kjs.mall.configs.SQLServerDBDialect
+    properties:
+      hibernate:
+        legacy_limit_handler: true
+        dialect: me.kjs.mall.configs.SQLServerDBDialect
+        default_batch_fetch_size: 1000
+    database: SQL_SERVER
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    generate-ddl: false
+    show-sql: false
+
+
+logging:
+  level:
+    root: info
+    org.hibernate.SQL: info
+    org.springframework.security: info
+
+server:
+  port: 15080
+
+
+kjs-mall:
+  common:
+    project_root_path: http://106.255.249.50:15080
+    client_path: http://192.168.0.251:10001
+  security:
+    refresh-token-expired-date: 14
+    token-valid-second: 7200
+    secret-key: mall_secret_key
+
+  payment:
+    nicePay:
+      return-url: ${kjs-mall.common.project_root_path}/api/payment/certification
+      merchant-id: nice_pay_id
+      merchant-key: nice_pay_secret_key
+      root-api-url: https://web.nicepay.co.kr
+      certification-request-url: ${kjs-mall.payment.nicePay.root-api-url}/v3/v3Payment.jsp
+      certification-request-webview-url: ${kjs-mall.common.project_root_path}/payment/request.html
+      redirect-result-page: response
+      cancel-api-url: https://webapi.nicepay.co.kr/webapi/cancel_process.jsp
+
+  delivery:
+    root-api-url: https://tracker.delivery/#/{carrier}/{invoiceNumber}
+
+  file-upload:
+    root-path: http://192.168.0.251:13080
+    upload-path: ${kjs-mall.file-upload.root-path}/upload
+
+  sms:
+    purrio:
+      user_id: 'purrio_user_id'
+      sender_phone: 'purrio_sender_phone'
+      cancel_api_url: https://message.ppurio.com/api/cancel_euckr_text.php
+      send_api_url: https://message.ppurio.com/api/send_euckr_text.php
+
+  login:
+    kakao:
+      client_id: kakao_client_id
+      client_secret: kakao_client_secret
+      token_request_url: https://kauth.kakao.com/oauth/token
+      redirect_url: ${kjs-mall.common.project_root_path}/login/kakao/redirect
+      token_request_grant_Type: authorization_code
+      user_request_header_type: Authorization
+      user_request_url: https://kapi.kakao.com/v2/user/me
+      disconnect_request_url: https://kapi.kakao.com/v1/user/unlink

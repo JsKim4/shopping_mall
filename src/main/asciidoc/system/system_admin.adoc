@@ -1,0 +1,108 @@
+= Mall API Guide
+김준섭;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:operation-curl-request-title: Example request
+:operation-http-response-title: Example response
+:docinfo: shared-head
+
+[[overview]]
+= 개요
+
+== link:/docs/index.html[home]
+
+[[overview-error-verbs]]
+== 오류 코드
+
+|===
+| 발생 API | CAUSE | CODE | MESSAGE
+
+
+|
+|===
+
+[[overview-api-grant]]
+== API 권한
+
+|===
+| 사용 API | 필요 권한
+
+|<<resources-version-update>>
+| ADMIN
+
+|<<resources-version-query>>
+| ADMIN
+
+|<<resources-version-create>>
+| ADMIN
+
+|<<resources-seller-update>>
+| ADMIN
+
+
+|
+|===
+
+[[history]]
+== 히스토리
+
+히스토리는 문서의 변경이력을 표시한다.
+
+- 2020-12-18
+* <<resources-seller-query>> 최초 생성
+
+* <<resources-seller-update>> 최초 생성
+
+- 2020-11-13
+
+* <<resources-version-update>> 최초 생성
+
+* <<resources-version-query>> 최초 생성
+
+* <<resources-version-create>> 최초 생성
+
+* 문서 생성
+
+[[resources-system]]
+= 시스템 리소스
+
+앱버전 관리등의 시스템 리소스를 사용할 수 있습니다.
+
+[[resources-version-create]]
+=== 앱 버전 생성
+
+'POST' 요청을 사용해서 앱 버전 정보를 생성할 수 있다.
+
+operation::create-version[snippets='request-fields,response-fields,curl-request,http-response']
+
+[[resources-version-update]]
+=== 앱 버전 수정
+
+'PUT' 요청을 사용해서 앱 버전 정보를 수정할 수 있다.
+
+operation::update-version[snippets='path-parameters,request-fields,curl-request,http-response']
+
+[[resources-version-query]]
+=== 앱 버전 리스트 조회
+
+'GET' 요청을 사용해서 앱 버전 정보를 조회할 수 있다.
+
+operation::query-versions[snippets='response-fields,curl-request,http-response']
+
+[[resources-seller-query]]
+=== 판매자 정보 조회
+
+'GET' 요청을 사용해서 판매자 정보를 조회할 수 있다.
+
+operation::query-seller[snippets='response-fields,curl-request,http-response']
+
+[[resources-seller-update]]
+=== 판매자 정보 수정
+
+'PUT' 요청을 사용해서 판매자 정보를 수정할 수 있다.
+
+operation::update-seller[snippets='request-fields,curl-request,http-response']

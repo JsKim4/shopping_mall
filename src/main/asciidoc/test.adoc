@@ -1,0 +1,96 @@
+= Mall API Guide
+김준섭;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:operation-curl-request-title: Example request
+:operation-http-response-title: Example response
+:docinfo: shared-head
+
+[[overview]]
+= 개요
+
+== link:/docs/index.html[home]
+
+[[history]]
+== 히스토리
+
+히스토리는 문서의 변경이력을 표시한다.
+
+- 2020-12-02
+
+* <<resources-test-order-product-exchange-state-update>> 최초 생성
+
+* <<resources-test-order-specific-exchange-state-update>> 최초 생성
+
+- 2020-11-27
+
+* <<resources-test-order-delivery-accpet-update>> 최초 생성
+
+* <<resources-test-order-delivery-doing-update>> 최초 생성
+
+- 2020-11-26
+
+* <<resources-test-order-product-state-update>> 최초 생성
+
+- 2020-11-25
+
+* <<resources-test-order-specific-state-update>> 최초 생성
+
+* 문서 생성
+
+[[resources-test]]
+= 테스트 리소스
+
+테스트용 리소스를 사용할 수 있습니다.
+
+'주의' - 테스트 리소스의 특징상 리소스를 강제 변환하기 떄문에 API 이후 스탭이 정상적으로 작동하지 않을 가능성이 많습니다!
+
+[[resources-test-order-specific-state-update]]
+=== 주문 상세 상태 변경
+
+'Anything' 요청을 사용해서 주문 상세 상태를 변경할 수 있다
+
+operation::test-update-order-specific-state[snippets='path-parameters,curl-request,http-response']
+
+[[resources-test-order-product-state-update]]
+=== 주문 상품 상세 상태 변경
+
+'Anything' 요청을 사용해서 주문 상품 상태를 변경할 수 있다
+
+operation::test-update-order-product-state[snippets='path-parameters,curl-request,http-response']
+
+[[resources-test-order-specific-exchange-state-update]]
+=== 주문 교환 상태 변경
+
+'Anything' 요청을 사용해서 주문 교환 상태를 변경할 수 있다
+
+operation::test-update-order-specific-exchange-state[snippets='path-parameters,curl-request,http-response']
+
+[[resources-test-order-product-exchange-state-update]]
+=== 주문 상품 교환 상태 변경
+
+'Anything' 요청을 사용해서 주문 상품 교환 상태를 변경할 수 있다
+
+operation::test-update-order-product-exchange-state[snippets='path-parameters,curl-request,http-response']
+
+[[resources-test-order-delivery-doing-update]]
+=== 배송중으로 상태 변경
+
+'Anything' 요청을 사용해서 주문 상태를 배송중으로 변경할 수 있다.
+
+구매상태에서만 가능하며, 해당 API를 통해 변경시 데이터를 좀 더 안정적으로 변경 가능하다.
+
+operation::test-update-order-specific-delivery-doing[snippets='path-parameters,curl-request,http-response']
+
+[[resources-test-order-delivery-accpet-update]]
+=== 배송완료로 상태 변경
+
+'Anything' 요청을 사용해서 주문 상태를 배송완료상태로 변경할 수 있다.
+
+배송중 상태에서만 가능하며, 해당 API를 통해 변경시 데이터를 좀 더 안정적으로 변경 가능하다.
+
+operation::test-update-order-specific-delivery-accept[snippets='path-parameters,curl-request,http-response']

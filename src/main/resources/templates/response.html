@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <title>payment</title>
+</head>
+<body>
+</body>
+<script th:inline="javascript">
+    let status = [[${status}]];
+    let message = [[${message}]];
+    let data = [[${data}]];
+    console.log(data);
+    console.log("response message : ", message);
+    console.log("response status : ", status);
+    window.parent.parent.postMessage({"status": status, "message": message, "data": data}, '*');
+
+</script>
+
+</html>

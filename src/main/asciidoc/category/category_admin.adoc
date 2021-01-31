@@ -1,0 +1,124 @@
+= Mall API Guide
+김준섭;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:operation-curl-request-title: Example request
+:operation-http-response-title: Example response
+:docinfo: shared-head
+
+[[overview]]
+= 개요
+
+== link:/docs/index.html[home]
+
+[[overview-error-verbs]]
+== 오류 코드
+
+|===
+| 발생 API | CAUSE | CODE | MESSAGE
+
+| <<resources-category-update>>
+| 부모 카테고리가 NULL 이 아닌데 존재하지 않는 경우
+| 404
+| 요청한 리소스가 존재하지 않습니다.
+
+| <<resources-category-create>>
+| 부모 카테고리가 NULL 이 아닌데 존재하지 않는 경우
+| 404
+| 요청한 리소스가 존재하지 않습니다.
+
+| <<resources-category-update>>
+| 카테고리의 부모로 자기자신을 지목하거나 자신의 자식을 부모로 지정할 경우
+| 4019
+| 카테고리의 부모는 자신이 될 수 없습니다. 카테고리의 부모가 서로 크로싱 될수 없습니다.
+
+|
+|===
+
+[[overview-api-grant]]
+== API 권한
+
+|===
+| 사용 API | 필요 권한
+
+| <<resources-category-create>>
+| BASE_PRODUCT
+
+| <<resources-category-update>>
+| BASE_PRODUCT
+
+| <<resources-category-unused-update>>
+| BASE_PRODUCT
+
+| <<resources-category-used-update>>
+| BASE_PRODUCT
+
+| <<resources-category-delete>>
+| BASE_PRODUCT
+
+|
+|===
+
+[[history]]
+== 히스토리
+
+히스토리는 문서의 변경이력을 표시한다.
+
+- 2020-11-06
+
+* <<resources-category-delete>> 최초 생성
+
+* <<resources-category-unused-update>> 최초 생성
+
+* <<resources-category-used-update>> 최초 생성
+
+* <<resources-category-update>> 최초 생성
+
+* <<resources-category-create>> 최초 생성
+
+* 문서 생성
+
+[[resources-category-admin]]
+== 카테고리 리소스
+
+상품 카테고리 리소스를 사용할 수 있습니다.
+
+[[resources-category-create]]
+=== 카테고리 생성
+
+'POST' 요청을 사용해서 카테고리를 생성할 수 있습니다.
+
+operation::create-category[snippets='request-fields,response-fields,curl-request,http-response']
+
+[[resources-category-used-update]]
+=== 카테고리 사용
+
+'PUT' 요청을 사용해서 카테고리를 사용 상태로 변경할 수 있습니다.
+
+operation::update-category-used[snippets='path-parameters,curl-request,http-response']
+
+[[resources-category-unused-update]]
+=== 카테고리 사용 중지
+
+'PUT' 요청을 사용해서 카테고리를 사용 중지 상태로 변경할 수 있습니다.
+
+operation::update-category-unused[snippets='path-parameters,curl-request,http-response']
+
+[[resources-category-update]]
+=== 카테고리 수정
+
+'PUT' 요청을 사용해서 카테고리를 수정할 수 있습니다.
+
+operation::update-category[snippets='path-parameters,request-fields,curl-request,http-response']
+
+[[resources-category-delete]]
+=== 카테고리 삭제
+
+'DELETE' 요청을 사용해서 카테고리를 삭제할 수 있습니다.
+
+operation::delete-category[snippets='path-parameters,curl-request,http-response']
+

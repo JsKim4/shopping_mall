@@ -1,0 +1,361 @@
+= Mall API Guide
+김준섭;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+:operation-curl-request-title: Example request
+:operation-http-response-title: Example response
+:docinfo: shared-head
+:docinfo: = :docinfo: private
+
+[[overview]]
+= 개요
+
+[[overview-http-verbs]]
+== HTTP 동사
+
+본 REST API 에서 사용하는 HTTP 동사(verbs)는 가능한한 표준 HTTP와 REST 규약을 따릅니다.
+
+|===
+| 동사 | 용례 | 기본 응답 코드
+
+| `GET`
+| 리소스를 가져올 때 사용
+| 200
+
+| `POST`
+| 새 리소스를 만들 때 사용
+| 201
+
+
+| `PUT`
+| 기존 리소스를 수정할 때 사용
+| 204
+
+| `PATCH`
+| 기존 리소스의 일부를 수정할 때 사용
+| 204
+
+| `DELETE`
+| 기존 리소스를 삭제할 떄 사용
+| 204
+|===
+
+[[overview-error-verbs]]
+== 공통 오류 코드
+
+|===
+| 발생 API | CAUSE | CODE | MESSAGE
+
+| 수정 / 삭제 API
+| 해당 리소스의 수정 / 삭제 권한이 없는 경우 (등록한 사용자가 아닌경우)
+| 403
+| grant Exception
+
+| 조회 / 생성 API
+| 요청한 리소스가 존재하지 않는경우
+| 404
+| 요청한 리소스가 존재하지 않습니다.
+
+| 인증이 필요한 모든 API
+| 권한이 모자르거나 토큰이 만료된 경우
+| 401
+| 토큰이 만료 되었습니다.
+
+|
+|===
+
+[[history]]
+== 히스토리
+
+히스토리는 문서의 변경이력을 표시한다.
+
+- 2021-01-27
+* link:/docs/member.html[비밀번호 찾기 API 수정 / 이메일 찾기 신규 생성 / 회원 탈퇴 추가 / 회원정보 수정 추가]
+* link:/docs/cert.html[인증 API 일부 추가]
+* link:/docs/main.html[추천 상품 조회 추가]
+
+- 2021-01-26
+* link:/docs/app_script.html[소셜 회원가입/로그인 인터페이스 추가]
+* link:/docs/cert.html[이메일 인증 추가]
+* link:/docs/member.html[소셜 계정 연동 추가]
+
+- 2021-01-25
+* link:/docs/cert.html[인증 관련 문서 추가]
+* link:/docs/banner.html[배너(사용자) 관련 문서 추가]
+* link:/docs/banner_admin.html[배너(관리자) 관련 문서 추가]
+
+- 2021-01-15
+* link:/docs/order_admin.html[발주 상태로 변경 API 추가]
+
+
+- 2021-01-15
+* link:/docs/order_admin.html[발주 상태로 변경 API 추가]
+
+- 2021-01-13
+* link:/docs/order_admin.html[발주 정보 다운로드 API 추가]
+
+- 2020-01-06
+
+* link:/docs/story.html[쇼핑스토리 일부 API 응답 필드 변경]
+* link:/docs/event.html[이벤트 일부 API 응답 필드 변경]
+* link:/docs/notice.html[공지사항 일부 API 응답 필드 변경]
+
+- 2020-01-05
+* link:/docs/order_admin.html[주문 리소스(관리자) 최초 생성]
+
+- 2020-12-30
+* link:/docs/coupon.html[쿠폰 리소스(사용자) API 추가]
+
+- 2020-12-23
+* link:/docs/main.html[메인 화면 관련(사용자) 추가]
+* link:/docs/main_admin.html[메인 화면 관련(어드민) 추가]
+
+- 2020-12-18
+* link:/docs/review_admin.html[리뷰 리소스(어드민) 추가]
+
+- 2020-12-16
+* link:/docs/coupon_admin.html[쿠폰 리소스(관리자) 최초 생성]
+* link:/docs/reivew.html[리뷰 리소스(사용자) 최초 생성]
+* link:/docs/product.html[상품 리소스(사용자) 응답 필드 추가]
+* link:/docs/product_admin.html[상품 리소스(사용자) 응답 필드 추가]
+
+- 2020-12-15
+
+* link:/docs/notice_admin.html[공지 리소스(관리자) 최초 생성]
+* link:/docs/notice.html[공지 리소스(사용자) 최초 생성]
+* link:/docs/event_admin.html[이벤트 리소스(관리자) 최초 생성]
+* link:/docs/event.html[이벤트 리소스(사용자) 최초 생성]
+* link:/docs/story_admin.html[쇼핑 스토리 리소스(관리자) 최초 생성]
+* link:/docs/story.html[쇼핑 스토리 리소스(사용자) 최초 생성]
+
+- 2020-12-09
+
+* link:/docs/order.html[주문 생성 관련 오류 코드 추가]
+
+* link:/docs/member.html[회원 당월 결제 금액 / 한도 조회 API 추가]
+
+- 2020-12-08
+
+* EnumType 문서화 완료
+
+- 2020-12-07
+
+* EnumType 문서화 (60%)
+
+- 2020-12-04
+
+* link:/docs/order.html[주문 리소스 교환 관련 API 추가]
+
+* link:/docs/upload.html[업로드 리소스 파일 크기 오류 처리]
+
+- 2020-12-03
+
+* link:/docs/upload.html[업로드 리스소 최초 생성]
+
+- 2020-12-02
+
+* link:/docs/test.html[테스트 리소스 교환 상태 수정 관련 API 추가]
+
+* link:/docs/order.html[주문 리소스 일부 응답 필드 추가]
+
+- 2020-11-27
+
+* link:/docs/test.html[테스트 리소스 배송 관련 API 추가]
+
+* link:/docs/order.html[주문 리소스 일부 응답 필드 추가]
+
+- 2020-11-26
+
+* link:/docs/order.html#resources-order-accept-update[구매 확정 최초 생성]
+
+* link:/docs/test.html#resources-test-order-product-state-update[주문 상품 상태 변경 최초 생성]
+
+* link:/docs/order.html#resources-order-destination-update[주문 배송지 수정 최초 생성]
+
+- 2020-11-25
+
+* link:/docs/order.html#resources-order-cancel[주문 취소 최초 생성]
+
+* link:/docs/order.html#resources-orders-query[주문 리스트 조회 응답 필드 추가]
+
+* link:/docs/order.html#resources-order-query[주문 상세 조회]
+
+* link:/docs/test.html#resources-test-order-specific-state-update[주문 상세 상태 변경 최초 생성]
+
+
+- 2020-11-24
+
+* link:/docs/order.html#resources-orders-query[주문 리스트 조회 최초 생성]
+
+* link:/docs/order.html#resources-order-create[주문 생성 응답 필드 추가]
+
+
+- 2020-11-20
+
+* link:/docs/app_script.html[앱 웹 인터페이스 문서 최초 생성]
+
+* link:/docs/order.html[주문 결제 모듈 연동 완료]
+
+- 2020-11-19
+
+* link:/docs/order.html[주문 관련 리소스 수정]
+
+- 2020-11-18
+
+* link:/docs/order.html[주문 API 추가]
+
+
+- 2020-11-17
+
+* link:/docs/order.html[주문 리소스(사용자) 최초 생성]
+
+
+- 2020-11-16
+
+* link:/docs/destination.html[배송지 수정 API 내부로직 수정]
+
+* link:/docs/base_product_admin.html[기본 상품 리소스(어드민) 응답 필드 변경]
+
+
+- 2020-11-13
+
+* link:/docs/system_admin.html[시스템 리소스(어드민) 최초 생성]
+
+* link:/docs/base_product_admin.html[상품 기본 정보 요청 필드 변경]
+
+* link:/docs/cart.html[장바구니 요청 필드 변경]
+
+- 2020-11-12
+
+* link:/docs/system.html[시스템 리소스(사용자) 최초 생성]
+
+* link:/docs/destination.html[배송지 리소스(사용자) 최초 생성]
+
+- 2020-11-11
+
+* link:/docs/product.html[판매 상품 정보 리소스(공통 및 사용자) 응답 필드 변경]
+
+* link:/docs/wish.html[찜 리소스(사용자) 최초 생성]
+
+* link:/docs/product_admin.html[판매 상품 정보 리소스(어드민) 응답 필드 추가]
+
+* link:/docs/product.html[판매 상품 정보 리소스(공통 및 사용자) 응답 필드 추가]
+
+- 2020-11-10
+
+* <<overview-error-verbs>> 최초 생성
+
+* link:/docs/cart.html[장바구니 리소스(사용자) 최초 생성]
+
+- 2020-11-09
+
+* link:/docs/base_product_admin.html[상품 기본 정보 리소스(어드민) API 추가]
+
+* link:/docs/product.html[판매 상품 정보 리소스(공통 및 사용자) 최초 생성]
+
+- 2020-11-06
+
+* link:/docs/category.html[카테고리(공통 및 사용자) 최초 생성]
+
+* link:/docs/category_admin.html[카테고리(어드민) 최초 생성]
+
+- 2020-11-04
+
+* link:/docs/product.html[상품 리소스(어드민) 최초 생성]
+
+- 2020-10-30
+
+* link:/docs/base_product_admin.html[상품 기본 정보 리소스(어드민) 최초 생성]
+
+- 2020-10-29
+
+* link:/docs/member.html[회원 리소스(공통 및 사용자) 변경]
+
+* link:/docs/member.html[회원 리소스(어드민) 변경]
+
+- 2020-10-28
+
+* link:/docs/member.html[회원 리소스 변경]
+
+[[resources]]
+= 리소스 리스트
+
+리소스를 사용할 수 있습니다.
+
+== link:/docs/index.html[0. home]
+
+== link:/docs/member.html[1. 회원 리소스(공통 및 사용자)]
+
+== link:/docs/member_admin.html[2. 회원 리소스(관리자)]
+
+== link:/docs/base_product_admin.html[3. 상품 기본 정보 리소스(관리자)]
+
+== link:/docs/product_admin.html[4. 판매 상품 정보 리소스(관리자)]
+
+== link:/docs/product.html[5. 판매 상품 정보 리소스(공통 및 사용자)]
+
+== link:/docs/category.html[6. 상품 카테고리 리소스(공통 및 사용자)]
+
+== link:/docs/category_admin.html[7. 상품 카테고리 리소스(관리자)]
+
+== link:/docs/cart.html[8. 장바구니 리소스(사용자)]
+
+== link:/docs/wish.html[9. 찜 리소스(사용자)]
+
+== link:/docs/destination.html[10. 배송지 리소스(사용자)]
+
+== link:/docs/system.html[11. 시스템 리소스(사용자)]
+
+== link:/docs/system_admin.html[12. 시스템 리소스(관리자)]
+
+== link:/docs/order.html[13. 주문 리소스(사용자)]
+
+== link:/docs/order_admin.html[14. 주문 리소스(관리자)]
+
+== link:/docs/notice.html[15. 공지 리소스(사용자)]
+
+== link:/docs/notice_admin.html[16. 공지 리소스(관리자)]
+
+== link:/docs/story.html[17. 쇼핑 스토리 리소스(사용자)]
+
+== link:/docs/story_admin.html[18. 쇼핑 스토리 리소스(관리자)]
+
+== link:/docs/event.html[19. 이벤트 리소스(사용자)]
+
+== link:/docs/event_admin.html[20. 이벤트 리소스(관리자)]
+
+== link:/docs/coupon.html[21. 쿠폰 리소스(사용자)]
+
+== link:/docs/coupon_admin.html[22. 쿠폰 리소스(관리자)]
+
+== link:/docs/review.html[23. 리뷰 리소스(사용자)]
+
+== link:/docs/review_admin.html[24. 리뷰 리소스(관리자)]
+
+== link:/docs/qna.html[25. qna 리소스(사용자)]
+
+== link:/docs/qna_admin.html[26. qna 리소스(관리자)]
+
+== link:/docs/point.html[27. 포인트 리소스(사용자)]
+
+== link:/docs/main.html[28. 메인 리소스(사용자)]
+
+== link:/docs/main_admin.html[29. 메인 리소스(관리자)]
+
+== link:/docs/cert.html[30. 인증 리소스(사용자)]
+
+== link:/docs/banner.html[31. 배너 리소스(사용자)]
+
+== link:/docs/banner_admin.html[32. 배너 리소스(관리자)]
+
+== link:/docs/type_exceptionStatus.html[96.응답 상태값 목록]
+
+== link:/docs/upload.html[97. 업로드 리소스]
+
+== link:/docs/app_script.html[98. WEB ↔ APP 연동 인터페이스]
+
+== link:/docs/test.html[99. 테스트용 API]

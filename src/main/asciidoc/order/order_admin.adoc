@@ -1,0 +1,82 @@
+= Mall API Guide
+김준섭;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:operation-curl-request-title: Example request
+:operation-http-response-title: Example response
+:docinfo: shared-head
+
+[[overview]]
+= 개요
+
+== link:/docs/index.html[home]
+
+[[overview-error-verbs]]
+== 오류 코드
+
+|===
+| 발생 API | CAUSE | CODE | MESSAGE
+| <<resources-order-place-accept-update>>
+| 발주 상태로 변경할 수 없는 경우에 변경시도 할 경우
+| 4046
+| 주문 상태를 배송 대기중 상태로 변경할 수 없습니다. \n cause order product code : {orderProductCode} \n reason : {reason}
+|
+|===
+
+[[history]]
+== 히스토리
+
+히스토리는 문서의 변경이력을 표시한다.
+
+
+- 2021-01-15
+* <<resources-order-place-accept-update>> 최초 생성
+
+- 2021-01-13
+* <<resources-order-place-create>> 최초 생성
+
+- 2021-01-07
+* <<resources-order-query>> 최초 생성
+
+- 2021-01-05
+
+* <<resources-orders-query>> 오류 코드 추가
+
+* 문서 생성
+
+[[resources-order]]
+== 주문 리소스
+
+주문 리소스(관리자)를 사용할 수 있습니다.
+
+[[resources-orders-query]]
+=== 주문 상품 리스트 조회
+
+'GET' 요청을 사용해서 주문 상품 리스트를 조회할 수 있다.
+
+operation::query-admin-orders[snippets='request-parameters,response-fields,curl-request,http-response']
+
+[[resources-order-query]]
+=== 주문 단건 조회
+
+'GET' 요청을 사용해서 주문 상품을 단건 조회할 수 있다.
+
+operation::query-admin-order[snippets='path-parameters,response-fields,curl-request,http-response']
+
+[[resources-order-place-create]]
+=== 발주정보 다운로드
+
+'POST' 요청을 사용해서 발주 정보를 요청할 수 있다.
+
+operation::create-admin-order-place[snippets='request-fields,response-fields,curl-request,http-response']
+
+[[resources-order-place-accept-update]]
+=== 발주 상태로 변경
+
+'PUT' 요청을 사용해서 발주 정보를 요청할 수 있다.
+
+operation::update-admin-order-place-accept[snippets='path-parameters,curl-request,http-response']

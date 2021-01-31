@@ -1,0 +1,253 @@
+= Mall API Guide
+김준섭;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:operation-curl-request-title: Example request
+:operation-http-response-title: Example response
+:docinfo: shared-head
+
+[[overview]]
+= 개요
+
+== link:/docs/index.html[home]
+
+[[overview-error-verbs]]
+== 오류 코드
+
+|===
+| 발생 API | CAUSE | CODE | MESSAGE
+
+| <<resources-order-sheet-create>>
+| 주문하려는 상품 재고 수량이 충분하지 않을 경우
+| 4017
+| 상품 재고 수량이 충분하지 않습니다.
+
+| <<resources-order-create>>
+| 주문하려는 상품 재고 수량이 충분하지 않을 경우
+| 4017
+| 상품 재고 수량이 충분하지 않습니다.
+
+| <<resources-order-query>>
+| 내가 구매한 주문이 아닌 주문을 조회할 경우
+| 403
+| grant Exception
+
+
+| <<resources-order-cancel>>
+| 주문 취소가 불가능한 상태인 경우
+| 4026
+| 결제 취소가 불가능한 상태입니다. 결제 취소는 결제 완료 상태에서만 가능합니다.
+
+| <<resources-order-cancel>>
+| 주문 취소가 실패한 경우
+| 4027
+| 4027 (PG사 실패메시지) / 그대로 띄워주시면 됩니다.
+
+| <<resources-order-destination-update>>
+| 주문 배송지 변경이 불가능한 상태인 경우
+| 4028
+| 배송지를 변경할 수 없는 상태입니다. 배송지 변경은 결제완료 상태에서만 가능합니다.
+
+
+| <<resources-order-accept-update>>
+| 구매 완료 변경이 불가능한 상태인 경우
+| 4029
+| 구매 확정으로 변경할 수 없는 상태입니다. 구매 확정은 배송완료 상태에서만 가능합니다.
+
+| <<resources-order-exchange-update>>
+| 교환 요청이 불가능한 상태값인 경우 (OrderState = Delivery & OrderExchangeState 는 승인 이전만 가능)
+| 4022
+| 교환 요청이 불가능한 상태이거나 환불하려는 상품 개수가 남은 주문 상품 개수보다 많습니다.
+
+| <<resources-order-exchange-delete>>
+| 교환 접수 승인 이후의 단계를 밟고 있는 경우 / 교환 요청 이전의 상태인경우
+| 4035
+| 교환 요청 취소가 불가능한 상태입니다.
+
+| <<resources-order-create>>
+| 상품 주문은 계정상태가 ALLOW에서만 가능함
+| 4036
+| 상품 주문이 불가능한 회원입니다.
+
+| <<resources-order-create>>
+| 구매 한도 금액을 초과한 경우
+| 4037
+| 구매 한도금액을 초과하였습니다.\n당월 구매 한도 : ${1} \n당월 구매 금액 : ${2} \n현재 구매 금액 : ${3}
+
+
+
+|
+|===
+
+[[history]]
+== 히스토리
+
+히스토리는 문서의 변경이력을 표시한다.
+
+- 2021-01-25
+* <<resources-order-create-non-member>> 최초 생성
+
+- 2021-01-15
+
+* <<resources-order-create>> 포인트 사용 추가
+
+- 2020-12-09
+
+* <<resources-order-create>> 오류 코드 추가
+
+- 2020-12-04
+
+* <<resources-order-exchange-delete>> 최초 생성
+
+* <<resources-order-exchange-update>> 최초 생성
+
+* <<resources-order-exchange-query>> 최초 생성
+
+
+- 2020-12-02
+
+* <<resources-order-query>> 응답 필드 추가 (OrderExchangeState,OrderProductExchangeState)
+
+* <<resources-order-create>> 응답 필드 추가 (OrderExchangeState,OrderProductExchangeState)
+
+- 2020-11-27
+
+* <<resources-orders-query>> 응답 필드 추가(deliveryApiUrl)
+
+* <<resources-order-query>> 응답 필드 추가(deliveryApiUrl)
+
+* <<resources-order-create>> 응답 필드 추가(deliveryApiUrl)
+
+- 2020-11-26
+
+* <<resources-order-accept-update>> 최초 생성
+
+* <<resources-order-destination-update>> 최초 생성
+
+- 2020-11-25
+
+* <<resources-order-cancel>> 최초 생성
+
+* <<resources-order-query>> 최초 생성
+
+- 2020-11-24
+
+* <<resources-orders-query>> 최초 생성
+
+* <<resources-order-create>> 응답 필드 추가 (data.orderSpecifics[].orderSpecificCode)
+
+- 2020-11-19
+
+* <<resources-order-sheet-create>> 주문서 생성 API 응답 필드 추가
+
+* <<resources-order-create>> 앱 + 웹 인터페이스 조정, 나이스 페이 요청 폼 생성
+
+- 2020-11-18
+
+* <<resources-order-create>> 최초 생성
+
+- 2020-11-17
+
+* <<resources-order-sheet-create>> 최초 생성
+
+* 문서 생성
+
+[[resources-order]]
+= 주문 리소스
+
+주문 리소스(사용자)를 사용할 수 있습니다.
+
+[[resources-order-sheet-create]]
+=== 주문서 생성
+
+'POST' 요청을 사용해서 주문서를 생성할 수 있다.
+
+operation::create-order-sheet[snippets='request-fields,response-fields,curl-request,http-response']
+
+[[resources-order-create]]
+=== 주문 생성
+
+'POST' 요청을 사용해서 주문을 생성할 수 있다.
+
+operation::create-order[snippets='request-fields,response-fields,curl-request,http-response']
+
+[[resources-orders-query]]
+=== 주문 리스트 조회
+
+'GET' 요청을 사용해서 주문 리스트를 조회할 수 있다.
+
+operation::query-orders[snippets='request-parameters,response-fields,curl-request,http-response']
+
+[[resources-order-query]]
+=== 주문 상세 조회
+
+'GET' 요청을 사용해서 주문을 상세 조회할 수 있다.
+
+operation::query-order[snippets='path-parameters,response-fields,curl-request,http-response']
+
+[[resources-order-cancel]]
+=== 주문 취소
+
+'PUT' 요청을 사용해서 주문을 취소할 수 있다.
+
+operation::update-order-cancel[snippets='path-parameters,request-fields,curl-request,http-response']
+
+[[resources-order-destination-update]]
+=== 주문 배송지 변경
+
+'PUT' 요청을 사용해서 주문 배송지를 변경할 수 있다.
+
+operation::update-order-destination[snippets='path-parameters,request-fields,curl-request,http-response']
+
+[[resources-order-accept-update]]
+=== 구매 확정
+
+'PUT' 요청을 사용해서 주문을 구매 확정 상태로 변경할 수 있다.
+
+operation::update-order-accept[snippets='path-parameters,curl-request,http-response']
+
+[[resources-order-exchange-update]]
+=== 교환 요청
+
+'PUT' 요청을 사용해서 주문 상품 교환을 신청할 수 있다.
+
+operation::update-order-exchange[snippets='path-parameters,request-fields,curl-request,http-response']
+
+[[resources-order-exchange-query]]
+=== 교환 조회
+
+'GET' 요청을 사용해서 주문 상품 교환을 조회할 수 있다.
+
+operation::query-order-exchange[snippets='path-parameters,response-fields,curl-request,http-response']
+
+[[resources-order-exchange-delete]]
+=== 교환 취소
+
+'DELETE' 요청을 사용해서 교환 요청을 취소할 수 있다.
+
+operation::delete-order-exchange[snippets='path-parameters,curl-request,http-response']
+
+[[resources-order-create-non-member]]
+=== 비회원 주문 생성
+
+'POST' 요청을 사용해서 비회원 주문을 생성할 수 있다.
+
+operation::create-order-non-member[snippets='request-fields,response-fields,curl-request,http-response']
+
+[[resources-order-create-non-member]]
+=== 비회원 주문 조회
+
+'GET' 요청을 사용해서 비회원 주문을 생성할 수 있다.
+
+operation::query-order-non-member[snippets='request-parameters,response-fields,curl-request,http-response']
+
+[[resources-order-cancel-non]]
+=== 주문 취소
+
+'PUT' 요청을 사용해서 비회원 주문을 상세 취소할 수 있다
+
+operation::update-order-cancel-non-member[snippets='path-parameters,request-fields,curl-request,http-response']

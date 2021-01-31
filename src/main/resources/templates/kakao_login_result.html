@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" value="" id="data"/>
+</body>
+<script th:inline="javascript">
+
+    let status = [[${status}]];
+    let message = decodeURIComponent([[${message}]]);
+    let data = [[${data}]];
+    callSnsLogin();
+
+    function callSnsLogin() {
+        console.log(status);
+        console.log(message);
+        console.log(data);
+        window.opener.postMessage({"status": status, "message": message, "data": data}, '*');
+        self.close();
+    }
+</script>
+</html>

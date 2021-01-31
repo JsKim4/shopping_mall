@@ -1,0 +1,199 @@
+= Mall API Guide
+김준섭;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:operation-curl-request-title: Example request
+:operation-http-response-title: Example response
+:docinfo: shared-head
+
+[[overview]]
+= 개요
+
+== link:/docs/index.html[home]
+
+[[overview-error-verbs]]
+== 오류 코드
+
+|===
+| 발생 API | CAUSE | CODE | MESSAGE
+
+| <<resources-base-product-create>>
+| 중복되는 상품코드가 존재할 경우
+| 4016
+| 이미 존재하는 상품 코드입니다.
+
+| <<resources-base-product-update>>
+| 변경하려는 상품코드가 이미 존재할 경우
+| 4016
+| 이미 존재하는 상품 코드입니다.
+
+|
+|===
+
+[[overview-api-grant]]
+== API 권한
+
+|===
+| 사용 API | 필요 권한
+
+| <<resources-base-product-create>>
+| BASE_PRODUCT
+
+| <<resources-base-product-delete>>
+| BASE_PRODUCT
+
+| <<resources-base-product-update-unused>>
+| BASE_PRODUCT
+
+| <<resources-base-product-update-used>>
+| BASE_PRODUCT
+
+| <<resources-base-product-update>>
+| BASE_PRODUCT
+
+| <<resources-base-product-create>>
+| BASE_PRODUCT
+
+| <<resources-base-product-query>>
+| BASE_PRODUCT
+
+| <<resources-base-product-query-only-product-role>>
+| PRODUCT
+
+|
+|===
+
+[[history]]
+== 히스토리
+
+히스토리는 문서의 변경이력을 표시한다.
+
+- 2021-01-25
+
+
+- 2020-11-16
+
+* <<resources-base-products-query>> 응답 필드 추가
+
+- 2020-11-13
+
+* <<resources-base-products-add-category-update>> 요청 필드 변경
+
+* <<resources-base-products-remove-category-update>> 요청 필드 변경
+
+
+- 2020-11-09
+
+* <<resources-base-products-query>> 최초 생성
+
+* <<resources-base-products-add-category-update>> 최초 생성
+
+* <<resources-base-products-remove-category-update>> 최초 생성
+
+- 2020-10-30
+
+* <<resources-base-product-query-only-product-role>> 최초 생성
+
+* <<resources-base-product-query>> 최초 생성
+
+* <<resources-base-product-delete>> 최초 생성
+
+* <<resources-base-product-update-unused>> 최초 생성
+
+* <<resources-base-product-update-used>> 최초 생성
+
+* <<resources-base-product-update>> 최초 생성
+
+* <<resources-base-product-create>> 최초 생성
+
+* 문서 생성
+
+[[resources-base-product]]
+== 상품 리소스
+
+상품 기본 리소스(admin)을 사용할 수 있습니다.
+
+[[resources-base-product-create]]
+=== 상품 기본 정보 생성
+
+'POST' 요청을 사용해서 상품 기본 정보를 생성할 수 있다.
+
+operation::create-base-product[snippets='request-fields,response-fields,curl-request,http-response']
+
+[[resources-base-product-update]]
+=== 상품 기본 정보 수정
+
+'PUT' 요청을 사용해서 상품 기본 정보를 수정할 수 있다.
+
+operation::update-base-product[snippets='path-parameters,request-fields,response-fields,curl-request,http-response']
+
+[[resources-base-product-provision-update]]
+=== 상품 기본 정보 수정
+
+'PUT' 요청을 사용해서 상품 정보 제공고시를 수정할 수 있다.
+
+operation::update-base-product-provision[snippets='path-parameters,request-fields,response-fields,curl-request,http-response']
+
+[[resources-base-product-update-used]]
+=== 상품 사용 상태로 변경
+
+'PUT' 요청을 사용해서 상품 사용 상태로 변경할 수 있다.
+
+operation::update-base-product-used[snippets='path-parameters,curl-request,http-response']
+
+[[resources-base-product-update-unused]]
+=== 상품 사용 중지 상태로 변경
+
+'PUT' 요청을 사용해서 상품 사용 중지 상태로 변경할 수 있다.
+
+operation::update-base-product-unused[snippets='path-parameters,curl-request,http-response']
+
+[[resources-base-product-delete]]
+=== 상품 삭제
+
+'DELETE' 요청을 사용해서 상품을 삭제할 수 있다.
+
+operation::delete-base-product[snippets='path-parameters,curl-request,http-response']
+
+[[resources-base-product-query]]
+=== 상품 조회
+
+'GET' 요청을 사용해서 상품목록을 조회할 수 있다.
+
+operation::query-base-product[snippets='request-parameters,response-fields,curl-request,http-response']
+
+[[resources-base-product-query-only-product-role]]
+=== 상품 조회(ONLY ROLES : PRODUCT)
+
+'GET' 요청을 사용해서 상품목록을 조회할 수 있다.
+
+BASE_PRODUCT 권한이 없고 PRODUCT 권한만 존재할 경우 사용중인 상품만 조회됨
+
+API 스펙은 <<resources-base-product-query>> 와 동일함
+
+operation::query-base-product-only-product-roles[snippets='response-fields,curl-request,http-response']
+
+[[resources-base-products-add-category-update]]
+=== 기본 상품 카테고리 추가
+
+'PUT' 요청을 사용해서 기본상품에 카테고리를 추가할 수 있다.
+
+operation::update-base-product-add-category[snippets='path-parameters,curl-request,http-response']
+
+[[resources-base-products-remove-category-update]]
+=== 기본 상품 카테고리 삭제
+
+'PUT' 요청을 사용해서 기본상품에 카테고리를 삭제할 수 있다.
+
+operation::update-base-product-remove-category[snippets='path-parameters,curl-request,http-response']
+
+[[resources-base-products-query]]
+=== 기본 상품 카테고리 조회
+
+'GET' 요청을 사용해서 기본상품에 카테고리를 조회할 수 있다.
+
+operation::query-base-product-category[snippets='path-parameters,response-fields,curl-request,http-response']

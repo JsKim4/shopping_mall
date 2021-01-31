@@ -1,0 +1,77 @@
+spring:
+  messages:
+    encoding: UTF-8
+
+
+  servlet:
+    multipart:
+      enabled: true
+      location: ${java.io.tmpdir}
+      max-file-size: 10MB
+      max-request-size: 10MB
+  jpa:
+    properties:
+      hibernate:
+        legacy_limit_handler: true
+        default_batch_fetch_size: 1000
+    database: h2
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    show-sql: true
+  main:
+    allow-bean-definition-overriding: true
+  flyway:
+    enabled: false
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+
+server:
+  port: 15080
+
+kjs-mall:
+  common:
+    project_root_path: http://project_host:project_port
+    client_path: http://project_host:project_port
+  security:
+    refresh-token-expired-date: 14
+    token-valid-second: 7200
+    secret-key: mall_secret_key
+
+  payment:
+    nicePay:
+      return-url: ${kjs-mall.common.project_root_path}/api/payment/certification
+      merchant-id: nice_pay_id
+      merchant-key: nice_pay_secret_key
+      root-api-url: https://web.nicepay.co.kr
+      certification-request-url: ${kjs-mall.payment.nicePay.root-api-url}/v3/v3Payment.jsp
+      certification-request-webview-url: ${kjs-mall.common.project_root_path}/payment/request.html
+      redirect-result-page: response
+      cancel-api-url: https://webapi.nicepay.co.kr/webapi/cancel_process.jsp
+
+  delivery:
+    root-api-url: https://tracker.delivery/#/{carrier}/{invoiceNumber}
+
+  file-upload:
+    root-path: http://file_sercer_host:file_server_port
+    upload-path: ${kjs-mall.file-upload.root-path}/upload
+
+  sms:
+    purrio:
+      user_id: 'purrio_user_id'
+      sender_phone: 'purrio_sender_phone'
+      cancel_api_url: https://message.ppurio.com/api/cancel_euckr_text.php
+      send_api_url: https://message.ppurio.com/api/send_euckr_text.php
+
+  login:
+    kakao:
+      client_id: kakao_client_id
+      client_secret: kakao_client_secret
+      token_request_url: https://kauth.kakao.com/oauth/token
+      redirect_url: ${kjs-mall.common.project_root_path}/login/kakao/redirect
+      token_request_grant_Type: authorization_code
+      user_request_header_type: Authorization
+      user_request_url: https://kapi.kakao.com/v2/user/me
+      disconnect_request_url: https://kapi.kakao.com/v1/user/unlink

@@ -1,0 +1,55 @@
+= Mall API Guide
+김준섭;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:operation-curl-request-title: Example request
+:operation-http-response-title: Example response
+:docinfo: shared-head
+
+[[overview]]
+= 개요
+
+== link:/docs/index.html[home]
+
+[[overview-error-verbs]]
+== 오류 코드
+
+|===
+| 발생 API | CAUSE | CODE | MESSAGE
+
+
+
+|
+|===
+
+[[hinotice]]
+== 히스토리
+
+히스토리는 문서의 변경이력을 표시한다.
+
+- 2020-12-15
+
+* 문서 생성
+
+[[resources-notice]]
+== 공지사항 리소스
+
+공지사항 리소스(공통및 사용자)을 사용할 수 있습니다.
+
+[[resources-notices-query]]
+=== 공지사항 조회
+
+'GET' 요청을 사용해서 공지사항을 조회할 수 있다.
+
+operation::query-notices[snippets='request-parameters,response-fields,curl-request,http-response']
+
+[[resources-notice-query]]
+=== 공지사항 단일 조회
+
+'GET' 요청을 사용해서 공지사항을 단일 조회할 수 있다.
+
+operation::query-notice[snippets='path-parameters,response-fields,curl-request,http-response']

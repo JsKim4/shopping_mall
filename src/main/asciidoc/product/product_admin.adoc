@@ -1,0 +1,150 @@
+= Mall API Guide
+김준섭;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:operation-curl-request-title: Example request
+:operation-http-response-title: Example response
+:docinfo: shared-head
+
+[[overview]]
+= 개요
+
+== link:/docs/index.html[home]
+
+[[overview-error-verbs]]
+== 오류 코드
+
+|===
+| 발생 API | CAUSE | CODE | MESSAGE
+
+| <<resources-product-stock-update>>
+| 제거하려는 상품 재고보다 현재 재고량이 적은 경우
+| 4017
+| 상품 재고 수량이 충분하지 않습니다.
+
+| <<resources-product-create>>
+| 기본 상품 상태가 USED가 아닌 상품을 판매상품에 등록할 경우
+| 4018
+| 사용중인 기본 상품정보가 아닙니다.
+
+| <<resources-product-create>>
+| 요청한 기본상품이 존재하지 않을 경우 / 삭제된 경우를 포함
+| 404
+| 요청한 리소스가 존재하지 않습니다.
+
+
+|
+|===
+
+[[overview-api-grant]]
+== API 권한
+
+|===
+| 사용 API | 필요 권한
+
+| <<resources-product-create>>
+| PRODUCT
+
+| <<resources-product-query>>
+| PRODUCT
+
+| <<resources-product-update>>
+| PRODUCT
+
+| <<resources-product-delete>>
+| PRODUCT
+
+| <<resources-product-stock-update>>
+| PRODUCT
+
+|
+|===
+
+[[history]]
+== 히스토리
+
+히스토리는 문서의 변경이력을 표시한다.
+
+- 2020-12-16
+
+* <<resources-product-create>> 응답 필드(evaluation) 추가
+
+* <<resources-product-query>> 응답 필드(evaluation) 추가
+
+- 2020-11-11
+
+* <<resources-product-query>> 응답 필드 추가
+
+* <<resources-product-create>> 응답 필드 추가
+
+
+- 2020-11-05
+
+* <<resources-product-stock-update>> 최초 생성 [.line-through]##
+* <<resources-product-delete>> 최초 생성
+
+* <<resources-product-update>> 최초 생성
+
+* <<resources-product-query>> 최초 생성
+
+* <<resources-product-create>> 최초 생성
+
+* 문서 생성
+
+[[resources-base-product]]
+= 판매 상품 리소스
+
+판매 상품 리소스(admin)을 사용할 수 있습니다.
+
+[[resources-product-create]]
+=== 판매 상품 정보 생성
+
+'POST' 요청을 사용해서 판매 상품 정보를 생성할 수 있다.
+
+operation::create-product[snippets='request-fields,response-fields,curl-request,http-response']
+
+[[resources-product-query]]
+=== 판매 상품 조회
+
+'GET' 요청을 사용해서 판매 상품 정보를 조회할 수 있다.
+
+operation::query-product-admin[snippets='request-parameters,response-fields,curl-request,http-response']
+
+[[resources-product-update]]
+=== 판매 상품 수정
+
+'PUT' 요청을 사용해서 판매 상품 정보를 수정할 수 있다.
+
+operation::update-product[snippets='path-parameters,request-fields,curl-request,http-response']
+
+[[resources-product-delete]]
+=== 판매 상품 삭제
+
+'DELETE' 요청을 사용해서 판매 상품을 삭제할 수 있다.
+
+operation::delete-product[snippets='path-parameters,curl-request,http-response']
+
+[[resources-product-stock-update]]
+=== 판매 상품 재고량 수정
+
+'PUT' 요청을 사용해서 판매 상품 재고량을 수정할 수 있다.
+
+operation::update-product-stock[snippets='path-parameters,request-fields,curl-request,http-response']
+
+[[resources-product-used-update]]
+=== 판매 상품 전시
+
+'PUT' 요청을 사용해서 판매 상품을 전시할 수 있습니다
+
+operation::update-product-used[snippets='path-parameters,curl-request,http-response']
+
+[[resources-product-unused-update]]
+=== 판매 상품 전시 중지
+
+'PUT' 요청을 사용해서 판매 상품을 전시할 수 있습니다
+
+operation::update-product-unused[snippets='path-parameters,curl-request,http-response']

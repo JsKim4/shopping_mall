@@ -1,0 +1,49 @@
+= Mall API Guide
+김준섭;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:operation-curl-request-title: Example request
+:operation-http-response-title: Example response
+:docinfo: shared-head
+
+[[overview]]
+= 개요
+
+== link:/docs/index.html[home]
+
+[[overview-error-verbs]]
+== 오류 코드
+
+|===
+| 발생 API | CAUSE | CODE | MESSAGE
+
+
+
+|
+|===
+
+[[history]]
+== 히스토리
+
+히스토리는 문서의 변경이력을 표시한다.
+
+
+- 2020-12-17
+
+* 문서 생성
+
+[[resources-point]]
+= 포인트 리소스
+
+포인트 리소스(사용자)를 사용할 수 있습니다.
+
+[[resources-point-current-member-query]]
+=== 포인트 목록 조회
+
+'GET' 요청을 사용해서 포인트 목록을 조회할 수 있다.
+
+operation::query-points-current[snippets='request-parameters,response-fields,curl-request,http-response']

@@ -1,0 +1,95 @@
+= Mall API Guide
+김준섭;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+:operation-curl-request-title: Example request
+:operation-http-response-title: Example response
+:docinfo: shared-head
+
+[[overview]]
+= 개요
+
+== link:/docs/index.html[home]
+
+[[overview-error-verbs]]
+== 오류 코드
+
+|===
+| 발생 API | CAUSE | CODE | MESSAGE
+
+| <<resources-member-check-cert-email>>
+| 이메일 중복시
+| 4008
+| 이미 등록된 이메일 입니다.
+
+|
+|===
+
+[[history]]
+== 히스토리
+
+히스토리는 문서의 변경이력을 표시한다.
+
+- 2021-01-26
+
+* <<resources-member-check-cert-email>> 최초생성
+
+* 문서 생성
+
+[[resources-member-cert]]
+== 인증 관련 리소스
+
+회원과 관련된 인증 리소스를 사용할 수 있다.
+
+[[resources-member-join-phone-cert-key-create]]
+=== 회원가입시 핸드폰번호 인증번호 발송
+
+'POST' 요청을 사용해서 회원가입시 핸드폰번호 인증번호를 발송할 수 있다.
+
+operation::create-member-join-phone-cert-key[snippets='request-fields,response-fields,curl-request,http-response']
+
+[[resources-member-join-cert-key-create]]
+=== 핸드폰 번호 인증 체크 및 회원가입 토큰 발급
+
+'POST' 요청을 사용해서 핸드폰 번호 인증 체크 및 회원가입 토큰을 발급받을 수 있다.
+
+operation::create-member-join-cert-key[snippets='request-fields,response-fields,curl-request,http-response']
+
+[[resources-member-check-cert-email]]
+=== 이메일 중복 검사
+
+'POST' 요청을 사용해서 이메일 중복을 검사할 수 있다..
+
+operation::create-check-email[snippets='request-fields,curl-request,http-response']
+
+[[resources-member-email-phone-cert-key-create]]
+=== 이메일 찾기 핸드폰 인증토큰 발급
+
+'POST' 요청을 사용해서 이메일 찾기 핸드폰번호 인증번호를 발송할 수 있다.
+
+operation::create-member-email-phone-cert-key[snippets='request-fields,response-fields,curl-request,http-response']
+
+[[resources-member-email-cert-key-create]]
+=== 이메일 찾기 핸드폰 인증 체크 및 이메일 찾기 토큰 발급
+
+'POST' 요청을 사용해서 이메일 찾기 핸드폰 번호 인증 체크 및 이메일 찾기 토큰을 발급받을 수 있다.
+
+operation::create-member-email-cert-key[snippets='request-fields,response-fields,curl-request,http-response']
+
+[[resources-member-password-phone-cert-key-create]]
+=== 비밀번호 찾기 핸드폰번호 인증번호 발송
+
+'POST' 요청을 사용해서 비밀번호 찾기 핸드폰번호 인증번호를 발송할 수 있다.
+
+operation::create-member-password-phone-cert-key[snippets='request-fields,response-fields,curl-request,http-response']
+
+[[resources-member-password-cert-key-create]]
+=== 비밀번호 찾기 핸드폰번호 인증 체크 및 비밀번호 찾기 토큰 발급
+
+'POST' 요청을 사용해서 비밀번호 찾기 핸드폰 번호 인증 체크 및 비밀번호 찾기 토큰을 발급받을 수 있다.
+
+operation::create-member-password-cert-key[snippets='request-fields,response-fields,curl-request,http-response']

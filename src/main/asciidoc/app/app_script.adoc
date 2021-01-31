@@ -1,0 +1,92 @@
+= Mall API Guide
+김준섭;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:operation-curl-request-title: Example request
+:operation-http-response-title: Example response
+:docinfo: shared-head
+
+[[overview]]
+= 개요
+
+== link:/docs/index.html[home]
+
+[[history]]
+== 히스토리
+
+히스토리는 문서의 변경이력을 표시한다.
+
+- 2021-01-26
+* <<resources-login-kakao>> 최초 생성
+* <<resources-register-kakao>> 최초 생성
+
+- 2021-01-24
+* <<resources-payment>> 로 응답 데이터 통일
+
+- 2020-11-20
+* <<resources-payment-form-create>> 인터페이스 생성
+
+
+* 문서 생성
+
+[[resources-script]]
+== APP WEB 연동 스크립트
+
+|===
+| NAME | FROM | TO | METHOD_NAME | ADDRESS | DESCRIPTION
+
+| 결제 완료 정보 전달
+| WEB
+| APP
+| postMessage
+| [api-host]:[api-port]/response.html
+| 결제 완료시 CALL
+
+
+| 결제 정보 전달
+| APP
+| WEB
+| createOrderForm
+| [api-host]:[api-port]/payment/request.html
+| 결제 정보 웹 페이지로 연결하여 결제 페이지 생성
+
+| 카카오 로그인
+| APP
+| WEB
+|
+| [api-host]:[api-port]/login/kakao
+| 카카오 로그인(웹뷰 / 전달 파라미터 x)
+
+| 카카오 로그인 결과
+| WEB
+| APP
+| postMessage
+| [api-host]:[api-port]/login/kakao/redirect
+| 카카오 로그인 결과 전달 <<resources-login-kakao>>, <<resources-register-kakao>>
+
+|
+|===
+
+[[resources-payment]]
+=== 결제 완료 정보 전달
+
+operation::interface-payment[snippets='response-fields']
+
+[[resources-payment-form-create]]
+=== 결제 정보 전달
+
+operation::interface-payment-create-form[snippets='request-fields']
+
+[[resources-login-kakao]]
+=== 카카오 로그인 성공결과 전달
+
+operation::interface-response-social-login[snippets='response-fields']
+
+[[resources-register-kakao]]
+=== 소셜 로그인 회원가입 필요 결과 전달
+
+operation::interface-response-social-register[snippets='response-fields']

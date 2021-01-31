@@ -1,0 +1,234 @@
+= Mall API Guide
+김준섭;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:operation-curl-request-title: Example request
+:operation-http-response-title: Example response
+:docinfo: shared-head
+
+[[overview]]
+= 개요
+
+== link:/docs/index.html[home]
+
+[[overview-error-verbs]]
+== 오류 코드
+
+|===
+| 발생 API | CAUSE | CODE | MESSAGE
+
+| <<resources-member-create>>
+| 이미 가입된 이메일로 회원가입
+| 4008
+| 이미 등록된 이메일 입니다.
+
+| <<resources-member-create>>
+| 이미 가입된 사번으로 회원가입
+| 4009
+| 이미 등록된 사번 입니다.
+
+| <<resources-members-update-admin>>
+| 이미 가입된 사번으로 변경을 시도할 경우 / 현재와 동일한 사번은 상관 X
+| 4009
+| 이미 등록된 사번 입니다.
+
+| <<resources-groups-create>>
+| 중복되는 ALIAS가 존재할 경우
+| 4010
+| 이미 등록된 ALIAS 입니다.
+
+| <<resources-groups-update>>
+| 중복되는 ALIAS가 존재할 경우
+| 4010
+| 이미 등록된 ALIAS 입니다.
+
+| <<resources-groups-update>>
+| superUser 혹은 default 그룹을 수정 시도할 경우
+| 4011
+| 기본 그룹 혹은 최고 관리자 그룹은 수정,삭제할 수 없습니다.
+
+| <<resources-members-update-ban>>
+| 회원 상태가 ALLOW 상태가 아닐 때 이용제한을 요청할 경우
+| 4014
+| 이용제한이 가능한 상태가 아닙니다.
+
+| <<resources-members-update-free>>
+| 회원 상태가 BAN 상태가 아닐 때 이용제한 해제를 요청할 경우
+| 4015
+| 이용제한 해제가 가능한 상태가 아닙니다.
+
+|
+|===
+
+[[overview-api-grant]]
+== API 권한
+
+|===
+| 사용 API | 필요 권한
+
+| <<resources-member-create>>
+| MEMBER_ADD
+
+| <<resources-roles-query>>
+| ACCOUNT_GROUP
+
+| <<resources-groups-query>>
+| ACCOUNT_GROUP
+
+| <<resources-groups-create>>
+| ACCOUNT_GROUP
+
+| <<resources-groups-update>>
+| ACCOUNT_GROUP
+
+| <<resources-member-groups-update>>
+| ACCOUNT_GROUP
+
+| <<resources-members-query>>
+| MEMBER_READ
+
+| <<resources-members-update-admin>>
+| MEMBER_MODIFY
+
+| <<resources-members-update-admin-password-initialize>>
+| MEMBER_MODIFY
+
+| <<resources-members-update-ban>>
+| MEMBER_MODIFY
+
+| <<resources-members-update-free>>
+| MEMBER_MODIFY
+
+|
+|===
+
+[[history]]
+== 히스토리
+
+히스토리는 문서의 변경이력을 표시한다.
+
+- 2020-10-29
+
+* <<overview-error-verbs>> 추가
+
+* <<overview-api-grant>> 추가
+
+* <<resources-members-update-free>> 최초 생성
+
+* <<resources-members-update-ban>> 최초 생성
+
+* <<resources-members-update-admin>> 최초 생성
+
+* <<resources-members-update-admin-password-initialize>> 최초 생성
+
+
+- 2020-10-28
+
+* <<resources-members-query>> 최초 생성
+
+* <<resources-member-groups-update>> 최초 생성
+
+* <<resources-groups-update>> 최초 생성
+
+* <<resources-groups-create>> 최초 생성
+
+* <<resources-groups-query>> 최초 생성
+
+* <<resources-roles-query>> 최초 생성
+
+* 문서 생성
+
+[[resources-member]]
+= 회원 리소스 리스트
+
+회원 리소스(admin)을 사용할 수 있습니다.
+
+[[resources-member-create]]
+=== 회원 가입
+
+'POST' 요청을 사용해서 회원가입을 진행할 수 있다.
+
+operation::create-member-success[snippets='request-fields,response-fields,curl-request,http-response']
+
+[[resources-grant]]
+= 권한 리소스 리스트
+
+권한 리소스(admin)을 사용할 수 있습니다.
+
+[[resources-roles-query]]
+=== 권한 리스트 조회
+
+'GET' 요청을 사용해서 권한 리스트를 조회할 수 있다.
+
+operation::query-member-account-roles[snippets='response-fields,curl-request,http-response']
+
+[[resources-groups-query]]
+=== 권한 그룹 리스트 조회
+
+'GET' 요청을 사용해서 권한 그룹 리스트를 조회할 수 있다.
+
+operation::query-member-account-groups[snippets='response-fields,curl-request,http-response']
+
+[[resources-groups-create]]
+=== 권한 그룹 생성
+
+'POST' 요청을 사용해서 권한 그룹을 생성할 수 있다.
+
+operation::create-member-account-groups[snippets='request-fields,response-fields,curl-request,http-response']
+
+[[resources-groups-update]]
+=== 권한 그룹 수정
+
+'PUT' 요청을 사용해서 권한 그룹을 수정할 수 있다.
+
+operation::update-member-account-groups[snippets='path-parameters,request-fields,curl-request,http-response']
+
+[[resources-member-groups-update]]
+=== 회원 권한 그룹 수정
+
+'PUT' 요청을 사용해서 회원 권한 그룹을 수정할 수 있다.
+
+operation::update-member-groups[snippets='path-parameters,request-fields,curl-request,http-response']
+
+[[resources-members-query]]
+=== 회원 리스트 조회
+
+'GET' 요청을 사용해서 회원 리스트를 조회할 수 있다.
+
+operation::query-members[snippets='request-parameters,response-fields,curl-request,http-response']
+
+////
+[[resources-members-update-admin]]
+== 회원 정보 수정
+
+'PUT' 요청을 사용해서 회원 정보를 변경할 수 있다.
+
+operation::update-member-admin[snippets='path-parameters,request-fields,curl-request,http-response']
+////
+
+[[resources-members-update-admin-password-initialize]]
+=== 회원 비밀번호 초기화
+
+'PUT' 요청을 사용해서 패스워드를 변경할 수 있다.
+
+operation::update-member-admin-password-initialize[snippets='path-parameters,request-fields,curl-request,http-response']
+
+[[resources-members-update-ban]]
+=== 회원 이용 제한
+
+'PUT' 요청을 사용해서 회원 이용을 제한시킬 수 있다.
+
+operation::update-member-ban[snippets='path-parameters,request-fields,curl-request,http-response']
+
+[[resources-members-update-free]]
+=== 회원 이용 제한 해제
+
+'PUT' 요청을 사용해서 회원 이용을 제한을 해제 수 있다.
+
+operation::update-member-free[snippets='path-parameters,curl-request,http-response']
+
+

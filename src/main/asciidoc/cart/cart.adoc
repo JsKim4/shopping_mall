@@ -1,0 +1,102 @@
+= Mall API Guide
+김준섭;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:operation-curl-request-title: Example request
+:operation-http-response-title: Example response
+:docinfo: shared-head
+
+[[overview]]
+= 개요
+
+== link:/docs/index.html[home]
+
+[[overview-error-verbs]]
+== 오류 코드
+
+|===
+| 발생 API | CAUSE | CODE | MESSAGE
+
+| <<resources-carts-quantity-update>>
+| 장바구니 주인이 아닌데 수정 / 삭제 하는 경우
+| 403
+| grant Exception
+
+| <<resources-carts-remove>>
+| 장바구니 주인이 아닌데 수정 / 삭제 하는 경우
+| 403
+| grant Exception
+
+| <<resources-cart-create>>
+| 상품 정보가 존재하지 않는 경우
+| 404
+| 요청한 리소스가 존재하지 않습니다.
+
+|
+|===
+
+[[history]]
+== 히스토리
+
+히스토리는 문서의 변경이력을 표시한다.
+
+- 2020-11-13
+
+* <<resources-carts-remove>> 요청 필드 형식 변경
+
+- 2020-11-10
+
+* <<resources-carts-remove>> 최초 생성
+
+* <<resources-carts-quantity-update>> 최초 생성
+
+* <<resources-carts-query>> 최초 생성
+
+* <<resources-cart-create>> 최초 생성
+
+* 문서 생성
+
+[[resources-cart]]
+== 장바구니 리소스
+
+장바구니 리소스(사용자)를 사용할 수 있습니다.
+
+[[resources-cart-create]]
+=== 장바구니 생성
+
+'POST' 요청을 사용해서 장바구니를 생성할 수 있다.
+
+operation::create-cart[snippets='request-fields,response-fields,curl-request,http-response']
+
+[[resources-carts-query]]
+=== 장바구니 조회
+
+'GET' 요청을 사용해서 로그인한 회원의 장바구니를 조회할 수 있다.
+
+operation::query-carts[snippets='response-fields,curl-request,http-response']
+
+[[resources-carts-quantity-update]]
+=== 장바구니 개수 수정
+
+'PUT' 요청을 사용해서 장바구니 개수를 수정할 수 있다.
+
+operation::update-carts-quantity[snippets='request-fields,path-parameters,curl-request,http-response']
+
+[[resources-cart-remove]]
+=== 장바구니 삭제
+
+'DELETE' 요청을 사용해서 장바구니를 삭제할 수 있다.
+
+operation::delete-cart[snippets='path-parameters,curl-request,http-response']
+
+[[resources-carts-remove]]
+=== 장바구니 리스트 삭제
+
+'DELETE' 요청을 사용해서 장바구니 리스트를 삭제할 수 있다.
+
+operation::delete-carts[snippets='request-fields,curl-request,http-response']
+

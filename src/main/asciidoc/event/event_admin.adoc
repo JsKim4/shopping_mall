@@ -1,0 +1,119 @@
+= Mall API Guide
+김준섭;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:operation-curl-request-title: Example request
+:operation-http-response-title: Example response
+:docinfo: shared-head
+
+[[overview]]
+= 개요
+
+== link:/docs/index.html[home]
+
+[[overview-error-verbs]]
+== 오류 코드
+
+|===
+| 발생 API | CAUSE | CODE | MESSAGE
+
+
+|
+|===
+
+[[overview-api-grant]]
+== API 권한
+
+|===
+| 사용 API | 필요 권한
+
+| <<resources-event-create>>
+| EVENT
+
+| <<resources-event-query>>
+| EVENT
+
+| <<resources-events-query>>
+| EVENT
+
+| <<resources-event-update>>
+| EVENT
+
+| <<resources-event-delete>>
+| EVENT
+
+| <<resources-event-update-used>>
+| EVENT
+
+| <<resources-event-update-unused>>
+| EVENT
+
+|
+|===
+
+[[history]]
+== 히스토리
+
+히스토리는 문서의 변경이력을 표시한다.
+
+- 2020-12-15
+
+* 문서 생성
+
+[[resources-event]]
+== 이벤트 리소스
+
+이벤트 리소스(admin)을 사용할 수 있습니다.
+
+[[resources-event-create]]
+=== 이벤트 정보 생성
+
+'POST' 요청을 사용해서 이벤트 정보를 생성할 수 있다.
+
+operation::create-event[snippets='request-fields,response-fields,curl-request,http-response']
+
+[[resources-events-query]]
+=== 이벤트 조회
+
+'GET' 요청을 사용해서 이벤트 정보를 조회할 수 있다.
+
+operation::query-events[snippets='request-parameters,response-fields,curl-request,http-response']
+
+[[resources-event-query]]
+=== 이벤트 단일 조회
+
+'GET' 요청을 사용해서 이벤트 단일 정보를 조회할 수 있다.
+
+operation::query-event[snippets='response-fields,curl-request,http-response']
+
+[[resources-event-update]]
+=== 이벤트 수정
+
+'PUT' 요청을 사용해서 이벤트 정보를 수정할 수 있다.
+
+operation::update-event[snippets='path-parameters,request-fields,curl-request,http-response']
+
+[[resources-event-delete]]
+=== 이벤트 삭제
+
+'DELETE' 요청을 사용해서 이벤트을 삭제할 수 있다.
+
+operation::delete-event[snippets='path-parameters,curl-request,http-response']
+
+[[resources-event-update-used]]
+=== 이벤트 사용 상태로 수정
+
+'PUT' 요청을 사용해서 이벤트를 사용 상태로 변경할 수 있다.
+
+operation::update-event-used[snippets='path-parameters,curl-request,http-response']
+
+[[resources-event-update-unused]]
+=== 이벤트 중지 상태로 수정
+
+'PUT' 요청을 사용해서 이벤트를 사용 중지상태로 변경할 수 있다.
+
+operation::update-event-unused[snippets='path-parameters,curl-request,http-response']
